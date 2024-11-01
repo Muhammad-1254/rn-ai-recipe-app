@@ -10,6 +10,7 @@ const cAxios = axios.create({
 // Request interceptor to add token to headers
 cAxios.interceptors.request.use(async (config) => {
   const accessToken = await SecureStore.getItemAsync('accessToken');
+  
   if (accessToken) {
     config.headers.Authorization = `Bearer ${accessToken}`;
   }
@@ -66,3 +67,7 @@ cAxios.interceptors.response.use((response) => {
 });
 
 export default cAxios;
+
+
+
+

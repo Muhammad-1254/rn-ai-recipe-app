@@ -24,8 +24,8 @@ const Selection = () => {
   const { _id: chatId } = useAppSelector((s) => s.chatScreen);
   const [isRecipeFixed, setIsRecipeFixed] = useState(false);
   const dispatch = useAppDispatch();
-  console.log("chatId", chatId);
   useEffect(() => {
+
     if (chatId) {
       setIsRecipeFixed(true);
     } else {
@@ -48,7 +48,7 @@ const Selection = () => {
   return (
     <View className="w-full  mt-5">
       {isRecipeFixed ? (
-        <RecipeDetailsDisplay isRecipeFixed={isRecipeFixed} />
+        <RecipeDetailsDisplay  />
       ) : (
         <View className="w-full gap-y-8 px-3">
           <IngredientsInput />
@@ -257,11 +257,7 @@ const SelectInput: FC<SelectInput> = ({ label, values, setValue }) => {
   );
 };
 
-const RecipeDetailsDisplay = ({
-  isRecipeFixed,
-}: {
-  isRecipeFixed: boolean;
-}) => {
+const RecipeDetailsDisplay = () => {
   const { mealType, complexity, cuisine, ingredients } = useAppSelector(
     (state) => state.chatScreen
   );

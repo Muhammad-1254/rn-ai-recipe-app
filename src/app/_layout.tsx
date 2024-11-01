@@ -17,17 +17,9 @@ import Toast from "react-native-toast-message";
 import GeneralModals from "./modals";
 import AuthProvider from "./providers/AuthProvider";
 import * as SecureStore from "expo-secure-store";
-export {
-  // Catch any errors thrown by the Layout component.
-  ErrorBoundary,
-} from "expo-router";
 
-export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: "(drawer)",
-};
+export { ErrorBoundary } from "expo-router";
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
@@ -36,7 +28,6 @@ export default function RootLayout() {
     ...FontAwesome.font,
   });
 
-  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
     if (error) throw error;
   }, [error]);
@@ -47,34 +38,22 @@ export default function RootLayout() {
     }
   }, [loaded]);
 
-  const router = useRouter();
-  useEffect(() => {
-    async function checkAuth() {
-      const isAuth = await SecureStore.getItemAsync("isAuth");
-      console.log({isAuth})
-      if (!isAuth || isAuth==='false' ) {
-        router.navigate("/(auth)/login");
-      }
-    }
-    checkAuth();
-  }, []);
-
   if (!loaded) {
     return null;
   }
   const { colorScheme } = useColorScheme();
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <ReduxProvider store={ReduxStore}>
+    <ReduxProvider store={ReduxStore}>
+<ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}> 
         <AuthProvider>
-          <Stack screenOptions={{ headerShown: false }}>
+          <Stack screenOptions={{ headerShown: false }} initialRouteName="/(drawer)/">
             <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
+            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
           </Stack>
-          <GeneralModals />
-
           <Toast />
+          <GeneralModals />
         </AuthProvider>
-      </ReduxProvider>
-    </ThemeProvider>
+        </ThemeProvider> 
+        </ReduxProvider>
   );
 }

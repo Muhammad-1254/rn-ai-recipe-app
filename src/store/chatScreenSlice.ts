@@ -41,7 +41,7 @@ const chatSlice = createSlice({
       for (const key in action.payload) {
         switch (key) {
           case "_id":
-            state._id = action.payload.chatId;
+            state._id = action.payload._id;
             break;
           case "ingredients":
             state.ingredients = action.payload.ingredients;

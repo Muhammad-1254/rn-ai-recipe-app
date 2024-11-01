@@ -13,7 +13,7 @@ export const userInitialState: UserInitialState = {
   username: null,
   email: null,
   isLoading: false,
-  isAuth: SecureStore.getItem("isAuth") ? true : false,
+  isAuth: SecureStore.getItem("isAuth")==='true' ? true : false,
 };
 
 const userSlice = createSlice({

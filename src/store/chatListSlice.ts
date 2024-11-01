@@ -25,9 +25,8 @@ type ChatList = {
   searchItemOpen: boolean;
 };
 
-const initialState: ChatList = {
+export const chatListInitialState: ChatList = {
   chatList: [],
-
   isLoading: false,
   hasMore: true,
   page: { skip: 0, limit: 20 },
@@ -38,7 +37,7 @@ const initialState: ChatList = {
 
 const chatListSlice = createSlice({
   name: "chatList",
-  initialState,
+  initialState:chatListInitialState,
   reducers: {
     setChatListData: (state, action) => {
       for (const key in action.payload) {

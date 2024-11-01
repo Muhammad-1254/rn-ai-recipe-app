@@ -18,7 +18,6 @@ import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { ChatItem, setChatListData } from "../store/chatListSlice";
 import { apiRoutes } from "../lib/apiRoutes";
 import _ from "lodash";
-import axios from "axios";
 import { timeFromNow } from "../lib/utils";
 import { chatScreenInitialState, setChatScreenData } from "../store/chatScreenSlice";
 import { useExpoRouter } from "expo-router/build/global-state/router-store";
@@ -28,6 +27,7 @@ import { useTheme } from "@react-navigation/native";
 import cAxios from "../lib/cAxios";
 import React from "react";
 import { setGlobalState } from "../store/global";
+import Toast from "react-native-toast-message";
 const CustomDrawer = (props: DrawerContentComponentProps) => {
   const { colorScheme } = useColorScheme();
 const dispatch = useAppDispatch()
@@ -83,9 +83,6 @@ const ChatSection = () => {
     isLoading,
     hasMore,
     page,
-    searchChatItems,
-    searchItemOpen,
-    searchLoading,
   } = useAppSelector((s) => s.ChatList);
 
   const currentDate = useRef(timeFromNow(new Date().toString()));
@@ -118,11 +115,10 @@ const ChatSection = () => {
 
   const onChatSelect = (chatId: string) => {
     const chat = chatList.find((c) => c._id === chatId);
-    console.log("Selected chat:", chat);
     if (chat) {
       dispatch(
         setChatScreenData({
-          chatId: chat._id,
+          _id: chat._id,
           ingredients: chat.ingredients,
           mealType: chat.mealType,
           complexity: chat.complexity,
@@ -133,7 +129,7 @@ const ChatSection = () => {
       );
       return;
     }
-    // toast({title: "Chat not found", variant: "destructive"});
+    Toast.show({text1: "Chat not found", type: "destructive"});
   };
 
   const onRefresh = async () => {
@@ -157,7 +153,6 @@ const ChatSection = () => {
         `${apiRoutes.getAllConversations}?skip=${page.skip}&limit=${page.limit}`
       );
       const data = res.data.data;
-      console.log("Fetched chats:", data);
       dispatch(
         setChatListData({
           chatList: [...chatList, ...data],
@@ -170,7 +165,7 @@ const ChatSection = () => {
       }
     } catch (error) {
       console.error("Error fetching chats:", error);
-      dispatch(setChatListData({ loading: false }));
+      dispatch(setChatListData({ isLoading: false }));
     }
   };
 
@@ -302,7 +297,6 @@ const FlatListFooter = ()=>{
 }
 const BottomSection = () => {
   const { colorScheme, toggleColorScheme } = useColorScheme();
-  const {modelType,modelVisible} = useAppSelector(s=>s.global)
   const dispatch = useAppDispatch()
   const  showProfileHandler =  ()=>{
     dispatch(setGlobalState({modelVisible:true,modelType:"profile"}))

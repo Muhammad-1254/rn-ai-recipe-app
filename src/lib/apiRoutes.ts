@@ -5,7 +5,7 @@
 const isDevelopment = false;
 
 
-const prefix = isDevelopment?"http://localhost:8000/api/v1":'https://waheed-ai-recipe-app-server.vercel.app/api/v1';
+const prefix = isDevelopment?"http://192.168.2.102:8000/api/v1":'https://waheed-ai-recipe-app-server.vercel.app/api/v1';
 
 
 export const apiRoutes = {

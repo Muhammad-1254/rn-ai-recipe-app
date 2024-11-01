@@ -1,4 +1,4 @@
-import { Image, Text, View } from "react-native";
+import { ActivityIndicator, Image, Text, View } from "react-native";
 import { useAppSelector } from "../hooks/redux";
 import { FontAwesome5, FontAwesome6, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import Markdown from "react-native-markdown-display";
@@ -75,7 +75,6 @@ const Chats = () => {
         }
       })}
       {messageLoading && <MessageLoadingSkeleton />}
-      {/* <UserInput /> */}
     </View>
   );
 };
@@ -84,15 +83,12 @@ export default Chats;
 
 
 const MessageLoadingSkeleton = () => {
+  const { colorScheme } = useColorScheme();
   return (
-    <View
-    //     className="w-full md:w-[90%]  max-w-xs  md:max-w-[500px] lg:max-w-[850px] xl:max-w-[1150px]
-    //   flex flex-col items-start gap-y-2   p-4 "
-    >
-      {/* <Skeleton className="h-4 w-full" />
-        <Skeleton className="h-4 w-full" />
-        <Skeleton className="h-4 w-[80%]" />
-        <Skeleton className="h-4 w-[70%]" /> */}
-    </View>
+<ActivityIndicator
+size={'large'}
+color={colorScheme==='dark'?Colors.dark.primary:Colors.light.primary}
+
+/>
   );
 };

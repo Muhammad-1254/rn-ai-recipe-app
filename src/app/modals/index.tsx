@@ -6,6 +6,9 @@ import { globalInitialState, setGlobalState } from "@/src/store/global";
 import { useRouter } from "expo-router";
 import * as SecureStore from "expo-secure-store";
 import { setUser, userInitialState } from "@/src/store/userSlice";
+import { chatListInitialState, setChatListData } from "@/src/store/chatListSlice";
+import { chatScreenInitialState, setChatScreenData } from "@/src/store/chatScreenSlice";
+import cAxios from "@/src/lib/cAxios";
 export default function GeneralModals() {
   const { modelType, modelVisible } = useAppSelector((state) => state.global);
   const dispatch = useAppDispatch();
@@ -28,19 +31,39 @@ const Profile = () => {
   const { username, email } = useAppSelector((state) => state.user);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const dispatch =useAppDispatch()
+  const dispatch = useAppDispatch();
   const logoutHandler = async () => {
     setLoading(true);
-    
-    
+
     await SecureStore.deleteItemAsync("isAuth");
     await SecureStore.deleteItemAsync("accessToken");
     await SecureStore.deleteItemAsync("refreshToken");
-    dispatch(setUser(userInitialState))
-    dispatch(setGlobalState(globalInitialState))
+    dispatch(
+      setUser({
+        userId: null,
+        username: null,
+        email: null,
+        isLoading: false,
+        isAuth: false,
+      })
+    );
+    dispatch(setChatListData(chatListInitialState))
+    dispatch(setChatScreenData(chatScreenInitialState))
+    dispatch(setGlobalState(globalInitialState));
+    delete cAxios.defaults.headers.common["Authorization"];
     setLoading(false);
-    router.navigate("/(auth)/login");
 
+    console.log(
+      "check aTOken: ",
+      await SecureStore.getItemAsync("accessToken")
+    );
+    console.log(
+      "check rTOken: ",
+      await SecureStore.getItemAsync("refreshToken")
+    );
+    console.log("check isAuth: ", await SecureStore.getItemAsync("isAuth"));
+
+    router.navigate("/(auth)/login");
   };
   return (
     <View className="w-[80%]   bg-card dark:bg-cardDark border border-border dark:border-borderDark rounded-3xl">

@@ -8,6 +8,7 @@ import { setUser as setGlobalUser } from "@/src/store/userSlice";
 import Toast from "react-native-toast-message";
 import cAxios from "@/src/lib/cAxios";
 import React from "react";
+import * as SecureStore from "expo-secure-store";
 const userInitialState = {
   email: "usman@gmail.com",
   password: "12345678",
@@ -15,7 +16,6 @@ const userInitialState = {
 
 const LoginScreen = () => {
   const [user, setUser] = useState(userInitialState);
-  //   const [signupUser, setSignupUser] = useState(signupUserInitialState);
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -34,6 +34,9 @@ const LoginScreen = () => {
             isAuth: true,
           })
         );
+        await SecureStore.setItemAsync("isAuth", "true");
+        await SecureStore.setItemAsync("accessToken", data.accessToken);
+        await SecureStore.setItemAsync("refreshToken", data.refreshToken);
       } else {
         Toast.show({
           type: "error",

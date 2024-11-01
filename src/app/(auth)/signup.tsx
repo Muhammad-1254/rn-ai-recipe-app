@@ -1,10 +1,8 @@
 import { useAppDispatch } from "@/src/hooks/redux";
 import { apiRoutes } from "@/src/lib/apiRoutes";
-import axios from "axios";
 import { Link, useRouter } from "expo-router";
 import { useState } from "react";
 import { Pressable, Text, TextInput, View } from "react-native";
-import { setUser as setGlobalUser } from "@/src/store/userSlice";
 import Toast from "react-native-toast-message";
 import cAxios from "@/src/lib/cAxios";
 
@@ -24,6 +22,7 @@ const LoginScreen = () => {
   const signupHandler = async () => {
 // @ts-ignore 
     for (const key in user) {
+      // @ts-ignore 
       if (user[key].trim() === "") {
         Toast.show({
           type: "error",

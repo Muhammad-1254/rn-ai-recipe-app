@@ -102,7 +102,7 @@ export default function UserInput() {
         dispatch(setChatScreenData({ messageLoading: false }));
       }
 
-    //   setInput("");
+      setInput("");
     }
   };
   useEffect(()=>{
