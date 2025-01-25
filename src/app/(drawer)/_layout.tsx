@@ -26,7 +26,7 @@ export default function TabLayout() {
 
 
   return (
-    <Drawer drawerContent={(props) => <CustomDrawer {...props} />}>
+    <Drawer drawerContent={(props:any) => <CustomDrawer {...props} />}>
       <Drawer.Screen
         name="index"
         options={{

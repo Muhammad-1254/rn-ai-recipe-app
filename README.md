@@ -25,8 +25,8 @@ This project uses Youtube data api for fetching best video result and for blogs 
 
 
 ### Watch Demo
-<video width="640" height="360" controls>
-  <source src="/public/demo.mp4" type="video/mp4"/>
+<video width="400" height="1200" controls>
+  <source src="public/demo.mp4" type="video/mp4"/>
   Your browser does not support the video tag.
 </video>
 

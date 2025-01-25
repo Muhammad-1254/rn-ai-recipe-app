@@ -2,7 +2,6 @@ import { FC } from "react";
 import {
   DimensionValue,
   Pressable,
-  TouchableWithoutFeedback,
   View,
 } from "react-native";
 import { KeyboardAvoidingView, Modal as RNModal } from "react-native";

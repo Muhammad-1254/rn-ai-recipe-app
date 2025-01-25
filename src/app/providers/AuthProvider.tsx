@@ -1,11 +1,10 @@
-import { useAppDispatch, useAppSelector } from "@/src/hooks/redux";
+import { useAppDispatch,  } from "@/src/hooks/redux";
 import { apiRoutes } from "@/src/lib/apiRoutes";
 import cAxios from "@/src/lib/cAxios";
 import { setUser } from "@/src/store/userSlice";
 import { useEffect } from "react";
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const user = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
 
   useEffect(() => {

@@ -2,11 +2,7 @@ import { DrawerContentComponentProps } from "@react-navigation/drawer";
 import { useRouter } from "expo-router";
 import {
   FlatList,
-  Pressable,
-  ScrollView,
-  Switch,
   Text,
-  TouchableHighlight,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -20,10 +16,8 @@ import { apiRoutes } from "../lib/apiRoutes";
 import _ from "lodash";
 import { timeFromNow } from "../lib/utils";
 import { chatScreenInitialState, setChatScreenData } from "../store/chatScreenSlice";
-import { useExpoRouter } from "expo-router/build/global-state/router-store";
 import { TextInput } from "react-native-gesture-handler";
 import { useColorScheme } from "nativewind";
-import { useTheme } from "@react-navigation/native";
 import cAxios from "../lib/cAxios";
 import React from "react";
 import { setGlobalState } from "../store/global";
@@ -34,7 +28,7 @@ const dispatch = useAppDispatch()
   const router = useRouter();
 
   const homeScreenNavigationHandler = () => {
-    router.navigate("/(drawer)/");
+    router.navigate("/(drawer)");
   };
   const newChatHandler = () => {
     console.log("New chat");
