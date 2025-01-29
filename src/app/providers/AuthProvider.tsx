@@ -15,14 +15,12 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
 export default AuthProvider;
 
-
 async function getUser(dispatch: any) {
   try {
-
+    
     dispatch(setUser({ isLoading: true }));
     const res = await cAxios.get(apiRoutes.getUser);
     const data = res.data.data;
-    console.log("user: ", data);
     if (data._id) {
       dispatch(
         setUser({

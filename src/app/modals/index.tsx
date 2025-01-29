@@ -53,15 +53,6 @@ const Profile = () => {
     delete cAxios.defaults.headers.common["Authorization"];
     setLoading(false);
 
-    console.log(
-      "check aTOken: ",
-      await SecureStore.getItemAsync("accessToken")
-    );
-    console.log(
-      "check rTOken: ",
-      await SecureStore.getItemAsync("refreshToken")
-    );
-    console.log("check isAuth: ", await SecureStore.getItemAsync("isAuth"));
 
     router.navigate("/(auth)/login");
   };

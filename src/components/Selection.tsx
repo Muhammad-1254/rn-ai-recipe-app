@@ -94,7 +94,6 @@ const IngredientsInput = () => {
     e: NativeSyntheticEvent<TextInputKeyPressEventData>
   ) => {
     if (e.nativeEvent.key === "Enter") {
-      console.log("enter pressed")
       addIngredientsHandler();
     }
   };

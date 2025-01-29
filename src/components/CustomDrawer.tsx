@@ -31,7 +31,6 @@ const dispatch = useAppDispatch()
     router.navigate("/(drawer)");
   };
   const newChatHandler = () => {
-    console.log("New chat");
     dispatch(setChatScreenData(chatScreenInitialState));
   };
 
@@ -91,7 +90,6 @@ const ChatSection = () => {
       dispatch(
         setChatListData({ searchChatItems: data, searchLoading: false })
       );
-      console.log("Searched chats:", data);
     } catch (error) {
       console.error("Error searching chats:", error);
       dispatch(setChatListData({ searchLoading: false }));

@@ -5,7 +5,7 @@ import Markdown from "react-native-markdown-display";
 import { StyleSheet } from "react-native";
 import { useColorScheme } from "nativewind";
 import Colors from "../constants/Colors";
-import { getMarkdownStyles } from "../lib/utils";
+import { getMarkdownStyles, print } from "../lib/utils";
 
 const Chats = () => {
   const { messages, messageLoading } = useAppSelector(
@@ -24,7 +24,7 @@ const Chats = () => {
           try {
             content = JSON.parse(content)?.prompt;
           } catch (error) {
-            // console.log("error", error);
+            print("error", error);
           }
           return (
             <View

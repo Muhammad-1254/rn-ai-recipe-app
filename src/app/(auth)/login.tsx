@@ -9,6 +9,7 @@ import Toast from "react-native-toast-message";
 import cAxios from "@/src/lib/cAxios";
 import React from "react";
 import * as SecureStore from "expo-secure-store";
+import { print } from "@/src/lib/utils";
 const userInitialState = {
   email: "usman@gmail.com",
   password: "12345678",
@@ -47,9 +48,9 @@ const LoginScreen = () => {
       }
 
       setLoading(false);
-      router.navigate("/(drawer)/");
+      router.navigate("/(drawer)");
     } catch (error: any) {
-      console.log("error while signup", error);
+      print("error while signup", error);
       Toast.show({
         type: "error",
         text1: "Something went wrong",

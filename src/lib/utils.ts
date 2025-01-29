@@ -1,6 +1,18 @@
 import moment from "moment";
 import Colors from "../constants/Colors";
 
+
+export const print = (...args:any)=>{
+  if(isDevelopment){
+    console.log(...args)
+  }  
+}
+
+
+
+export const isDevelopment = process.env.EXPO_PUBLIC_NODE_ENV ==='development';
+print({isDevelopment})
+
 export const timeFromNow = (date: string) => {
   const now = moment();
   const inputDate = moment(date);
@@ -27,6 +39,7 @@ export const timeFromNow = (date: string) => {
     return `${diffInYears} years ago`;
   }
 };
+
 
 export const getMarkdownStyles = (colorScheme?: "light" | "dark") => {
   return {

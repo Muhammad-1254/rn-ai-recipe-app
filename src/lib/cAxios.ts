@@ -2,6 +2,7 @@ import axios from 'axios';
 import * as SecureStore from "expo-secure-store";
 import { router } from 'expo-router';
 import { apiRoutes } from './apiRoutes';
+import { print } from './utils';
 
 const cAxios = axios.create({
   baseURL: ""
@@ -25,7 +26,7 @@ cAxios.interceptors.response.use((response) => {
 }, async (error) => {
   if(!error.response){
     // handling network error
-    console.log("error message from cAxios: ",error.message)
+    print("error message from cAxios: ",error.message)
     return Promise.reject(error)
   }
   const originalRequest = error.config;
@@ -37,7 +38,6 @@ cAxios.interceptors.response.use((response) => {
     try {
       const refreshToken = await SecureStore.getItemAsync("refreshToken")
       const response = await axios.post(apiRoutes.getAccessToken,{refreshToken})
-      console.log("response status from get new access token: ",response.status)
       if(response.status ===200|| response.status ===201){
         const {accessToken,refreshToken} = response.data
 
@@ -50,7 +50,6 @@ cAxios.interceptors.response.use((response) => {
         originalRequest.headers['Authorization'] = `Bearer ${accessToken}`
 
         // retry the original request with the new accessToken
-        console.log("retrying the original request with new access token")
         return cAxios(originalRequest)
 
       }

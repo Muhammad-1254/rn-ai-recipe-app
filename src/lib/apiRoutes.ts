@@ -1,11 +1,13 @@
 
 
 // eslint-disable-next-line no-undef
-// const isDevelopment = process.env.NODE_ENV === 'development';
-const isDevelopment = false;
 
+import { isDevelopment, print } from "./utils"
 
-const prefix = isDevelopment?"http://192.168.2.107:8000/api/v1":'https://ai-recipe-app-server.vercel.app';
+// const serverDomain = !isDevelopment? "http://192.168.2.107:8000": process.env.EXPO_PUBLIC_SERVER_DOMAIN
+const serverDomain = "https://ai-recipe-app-server.vercel.app"
+
+const prefix = `${serverDomain}/api/v1`
 
 
 export const apiRoutes = {

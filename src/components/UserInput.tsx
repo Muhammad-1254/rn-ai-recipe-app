@@ -10,6 +10,7 @@ import { View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useColorScheme } from "nativewind";
 import Colors from "../constants/Colors";
+import { print } from "../lib/utils";
 
 export default function UserInput() {
   const [input, setInput] = useState("");
@@ -45,7 +46,6 @@ export default function UserInput() {
           conversationId: chatId,
         });
         const data = res.data.data;
-        console.log("data", data);
         if (data._id) {
           dispatch(
             setChatScreenData({
@@ -61,7 +61,6 @@ export default function UserInput() {
           });
         }
       } catch (error) {
-        console.log("error while conversation", error);
         dispatch(setChatScreenData({ messageLoading: false }));
       }
     } else {
@@ -77,7 +76,6 @@ export default function UserInput() {
           prompt: input,
         });
         const data = res.data.data;
-        console.log("data", data);
         if (data._id) {
           dispatch(
             setChatScreenData({
@@ -97,7 +95,7 @@ export default function UserInput() {
           });
         }
       } catch (error) {
-        console.log("error while create new conversation", error);
+        print("error while create new conversation", error);
         dispatch(setChatScreenData({ messageLoading: false }));
       }
 

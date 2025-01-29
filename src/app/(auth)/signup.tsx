@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Pressable, Text, TextInput, View } from "react-native";
 import Toast from "react-native-toast-message";
 import cAxios from "@/src/lib/cAxios";
+import { print } from "@/src/lib/utils";
 
 const userInitialState = {
   email: "usman123",
@@ -43,7 +44,6 @@ const LoginScreen = () => {
     try {
       const res = await cAxios.post(apiRoutes.signup, user);
       const data = res.data.data;
-      console.log("data", data);
       if (data._id) {
         Toast.show({
           type: "success",
@@ -59,7 +59,7 @@ const LoginScreen = () => {
       }
       setLoading(false);
     } catch (error: any) {
-      console.log("error while signup", error);
+      print("error while signup", error);
       if (error?.status === 409) {
         Toast.show({
           type: "error",
